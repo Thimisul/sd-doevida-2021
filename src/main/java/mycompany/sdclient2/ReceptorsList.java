@@ -126,8 +126,13 @@ public class ReceptorsList extends javax.swing.JFrame {
         jLPassword.setText("Password:");
 
         jBLogin.setText("Login");
+        jBLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLoginActionPerformed(evt);
+            }
+        });
 
-        jBCreateReceptor.setText("Ainda não tenho uma conta");
+        jBCreateReceptor.setText("Ainda não tenho uma conta de Receptor");
 
         javax.swing.GroupLayout jPReceptorLayout = new javax.swing.GroupLayout(jPReceptor);
         jPReceptor.setLayout(jPReceptorLayout);
@@ -193,6 +198,11 @@ public class ReceptorsList extends javax.swing.JFrame {
     private void jBChatReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBChatReceptorActionPerformed
          new Chat("receptor1",server).setVisible(true);//que quer abrir
     }//GEN-LAST:event_jBChatReceptorActionPerformed
+
+    private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
+        new Login(server).setVisible(true);//que quer abrir
+        dispose();
+    }//GEN-LAST:event_jBLoginActionPerformed
 
     /**
      * @param args the command line arguments

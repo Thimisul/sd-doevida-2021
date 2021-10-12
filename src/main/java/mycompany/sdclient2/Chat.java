@@ -5,40 +5,81 @@
  */
 package mycompany.sdclient2;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
  * @author thi_s
  */
-public class Chat extends javax.swing.JFrame {
+public class Chat extends javax.swing.JFrame implements Runnable {
 
     Socket server;
-    private String receptor;
-    ObjectOutputStream saida;
 
-    
+    private String receptor;
+    private ArrayList<String> message_list;
+
+    ObjectOutputStream saida;
+    ObjectInputStream entrada;
+
     Chat(String receptor, Socket server) {
         super("Chat com " + receptor);
         this.server = server;
         this.receptor = receptor;
         initComponents();
-        start();
+        message_list = new ArrayList<String>();
+        newStart();
+    }
+    
+        Chat(Socket server) {
+        this.server = server;
+        this.receptor = receptor;
+        initComponents();
+        message_list = new ArrayList<String>();
+        newStart();
     }
 
-    
-    public void start(){
+    public void newStart() {
         this.pack();
         this.setVisible(true);
-    }
-    
-    public void append_message(String receive){
+        Thread threadChat = new Thread(this);
+        threadChat.start();
         
+    }
+
+    public void append_message(String received) {
+        message_list.add(received);
+        String message = "";
+        for (String str : message_list) {
+            message += str;
+        }
+        jEPMessages.setText(message);
+    }
+
+    public void send() {
+        try {
+            saida = null;
+            saida = new ObjectOutputStream(server.getOutputStream());
+            saida.writeObject(jTFMessage.getText());
+            DateFormat df = new SimpleDateFormat("hh:mm:ss");
+            append_message("<b>[" + df.format(new Date()) + "] Eu: <b><i>" + jTFMessage.getText() + "</i><br>");
+            jTFMessage.setText("");
+        } catch (IOException ex) {
+            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -64,7 +105,7 @@ public class Chat extends javax.swing.JFrame {
         jTFMessage = new javax.swing.JTextField();
         jBSendMessage = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPReceptor.setBorder(javax.swing.BorderFactory.createTitledBorder("Receptador"));
 
@@ -134,9 +175,9 @@ public class Chat extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Digite uma mensagem: "));
 
-        jTFMessage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFMessageActionPerformed(evt);
+        jTFMessage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTFMessageKeyPressed(evt);
             }
         });
 
@@ -188,10 +229,6 @@ public class Chat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFMessageActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFMessageActionPerformed
-
     private void jBrs2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrs2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBrs2ActionPerformed
@@ -201,18 +238,14 @@ public class Chat extends javax.swing.JFrame {
     }//GEN-LAST:event_jBrs20ActionPerformed
 
     private void jBSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSendMessageActionPerformed
-        try {
-            saida = new ObjectOutputStream(server.getOutputStream());
-            saida.writeObject(jTFMessage.getText());
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            saida = null;
-        }
+        send();
     }//GEN-LAST:event_jBSendMessageActionPerformed
 
-
+    private void jTFMessageKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMessageKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            send();
+        }
+    }//GEN-LAST:event_jTFMessageKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSendMessage;
@@ -229,4 +262,23 @@ public class Chat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jSPMessages;
     private javax.swing.JTextField jTFMessage;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+         DateFormat df = new SimpleDateFormat("hh:mm:ss");
+        while (true) {
+            
+            try {
+                entrada = null;
+                entrada = new ObjectInputStream(server.getInputStream());
+                String msgReceive = (String) entrada.readObject();
+                append_message("<b>[" + df.format(new Date()) + "]"+  receptor + " : <b><i>" + msgReceive + "</i><br>");
+               
+            } catch (IOException ex) {
+                Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                 Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+             }
+        }
+    }
 }

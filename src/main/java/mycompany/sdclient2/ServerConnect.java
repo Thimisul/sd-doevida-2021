@@ -56,6 +56,7 @@ public class ServerConnect extends JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lBind.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lBind.setText("Porta: ");
@@ -173,7 +174,7 @@ public class ServerConnect extends JFrame {
         try {
             // TODO add your handling code here:
             server = new Socket(tfServer.getText(), Integer.parseInt(tfBind.getText()));
-            new ReceptorsList(server).setVisible(true);//que quer abrir
+            new Login(server).setVisible(true);//que quer abrir
             dispose();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,

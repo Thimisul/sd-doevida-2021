@@ -236,10 +236,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBLoginActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBCreateReceptor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ainda n&#xe3;o tenho uma conta"/>
+            <Property name="text" type="java.lang.String" value="Ainda n&#xe3;o tenho uma conta de Receptor"/>
           </Properties>
         </Component>
       </SubComponents>
