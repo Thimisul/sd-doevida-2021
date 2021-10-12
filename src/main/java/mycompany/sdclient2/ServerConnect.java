@@ -5,6 +5,7 @@
  */
 package mycompany.sdclient2;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.Socket;
 import javax.swing.JFrame;
@@ -67,9 +68,9 @@ public class ServerConnect extends JFrame {
             }
         });
 
-        tfBind.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBindActionPerformed(evt);
+        tfBind.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfBindKeyPressed(evt);
             }
         });
 
@@ -166,15 +167,22 @@ public class ServerConnect extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfServerActionPerformed
 
-    private void tfBindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBindActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBindActionPerformed
-
     private void bConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConnectActionPerformed
+        send();
+    }//GEN-LAST:event_bConnectActionPerformed
+
+    private void tfBindKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBindKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            send();
+        }
+    }//GEN-LAST:event_tfBindKeyPressed
+
+    private void send(){
         try {
             // TODO add your handling code here:
             server = new Socket(tfServer.getText(), Integer.parseInt(tfBind.getText()));
-            new Login(server).setVisible(true);//que quer abrir
+            //new Login(server).setVisible(true);//que quer abrir
+            new ChatReceptor(server).setVisible(true);//que quer abrir
             dispose();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
@@ -189,8 +197,7 @@ public class ServerConnect extends JFrame {
         JOptionPane.INFORMATION_MESSAGE);
             System.out.println(ex);
         } 
-    }//GEN-LAST:event_bConnectActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
