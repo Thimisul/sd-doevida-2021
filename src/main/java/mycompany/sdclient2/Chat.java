@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import utils.Utils;
 
 /**
  *
@@ -70,16 +71,19 @@ public class Chat extends javax.swing.JFrame implements Runnable {
     }
 
     public void send() {
-        try {
-            saida = null;
-            saida = new ObjectOutputStream(server.getOutputStream());
-            saida.writeObject(jTFMessage.getText());
+//        try {
+            //saida = null;
+            //saida = new ObjectOutputStream(server.getOutputStream());
+            //saida.writeObject(jTFMessage.getText());
+            
+            Utils.sendMessage(server, jTFMessage.getText());
+            
             DateFormat df = new SimpleDateFormat("hh:mm:ss");
             append_message("<b>[" + df.format(new Date()) + "] Eu: <b><i>" + jTFMessage.getText() + "</i><br>");
             jTFMessage.setText("");
-        } catch (IOException ex) {
-            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        } catch (IOException ex) {
+//            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -266,17 +270,11 @@ public class Chat extends javax.swing.JFrame implements Runnable {
     @Override
     public void run() {
          DateFormat df = new SimpleDateFormat("hh:mm:ss");
-        while (true) {
-            
-            try {
-                entrada = null;
-                entrada = new ObjectInputStream(server.getInputStream());
-                String msgReceive = (String) entrada.readObject();
-                append_message("<b>[" + df.format(new Date()) + "]"+  receptor + " : <b><i>" + msgReceive + "</i><br>");
-               
-            } catch (IOException ex) {
-                Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+        while (true) {        
+                String msgReceive = Utils.receiveMessage(server);
+             try {
+                 append_message("<b>[" + df.format(new Date()) + "]"+  server.getOutputStream() + " : <b><i>" + msgReceive + "</i><br>");
+             } catch (IOException ex) {
                  Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
              }
         }

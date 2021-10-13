@@ -7,6 +7,7 @@ package mycompany.sdclient2;
 
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import utils.Utils;
 
 /**
  *
@@ -14,11 +15,11 @@ import java.net.Socket;
  */
 public class Login extends javax.swing.JFrame {
 
-Socket server;
+Socket connection;
     ObjectOutputStream saida;
 
-    public Login(Socket server) { 
-        this.server = server;
+    public Login(Socket connection) { 
+        this.connection = connection;
         initComponents();
         start();
     }
@@ -183,11 +184,12 @@ Socket server;
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
         if (jRBDoador.isSelected()){
-            new ReceptorsList(server).setVisible(true);//que quer abrir
+            Utils.sendMessage(connection, "dinho" + ":" + connection.getRemoteSocketAddress());
+            new ReceptorsList(connection).setVisible(true);//que quer abrir
         }else if( jRBRecept.isSelected()){
-            new Chat(server).setVisible(true);//que quer abrir
+            new Chat(connection).setVisible(true);//que quer abrir
         }else if(jRBAdmin.isSelected()){
-            new ReceptorsList(server).setVisible(true);//que quer abrir
+            new ReceptorsList(connection).setVisible(true);//que quer abrir
         }
         dispose();
     }//GEN-LAST:event_jBLoginActionPerformed
