@@ -10,16 +10,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import utils.Utils;
 
 /**
@@ -95,87 +91,21 @@ public class Chat extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPReceptor = new javax.swing.JPanel();
-        jSPMessages = new javax.swing.JScrollPane();
-        jEPMessages = new javax.swing.JEditorPane();
-        jPDonations = new javax.swing.JPanel();
-        jBrs2 = new javax.swing.JButton();
-        jBrs10 = new javax.swing.JButton();
-        jBrs20 = new javax.swing.JButton();
-        jBrs50 = new javax.swing.JButton();
-        jBrs100 = new javax.swing.JButton();
-        jBrs200 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jTFMessage = new javax.swing.JTextField();
         jBSendMessage = new javax.swing.JButton();
+        jPReceptor1 = new javax.swing.JPanel();
+        jSPMessages1 = new javax.swing.JScrollPane();
+        jEPMessages = new javax.swing.JEditorPane();
+        jPDonations1 = new javax.swing.JPanel();
+        jBrs3 = new javax.swing.JButton();
+        jBrs11 = new javax.swing.JButton();
+        jBrs21 = new javax.swing.JButton();
+        jBrs51 = new javax.swing.JButton();
+        jBrs101 = new javax.swing.JButton();
+        jBrs201 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jPReceptor.setBorder(javax.swing.BorderFactory.createTitledBorder("Receptador"));
-
-        jEPMessages.setEditable(false);
-        jEPMessages.setContentType("text/html"); // NOI18N
-        jSPMessages.setViewportView(jEPMessages);
-
-        jPDonations.setBorder(javax.swing.BorderFactory.createTitledBorder("Doações"));
-
-        jBrs2.setText("R$ 2,00");
-        jBrs2.setMaximumSize(new java.awt.Dimension(83, 25));
-        jBrs2.setMinimumSize(new java.awt.Dimension(83, 25));
-        jBrs2.setPreferredSize(new java.awt.Dimension(83, 25));
-        jBrs2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBrs2ActionPerformed(evt);
-            }
-        });
-        jPDonations.add(jBrs2);
-
-        jBrs10.setText("R$ 10,00");
-        jBrs10.setMaximumSize(new java.awt.Dimension(83, 25));
-        jBrs10.setMinimumSize(new java.awt.Dimension(83, 25));
-        jBrs10.setPreferredSize(new java.awt.Dimension(83, 25));
-        jPDonations.add(jBrs10);
-
-        jBrs20.setText("R$ 20,00");
-        jBrs20.setMaximumSize(new java.awt.Dimension(83, 25));
-        jBrs20.setMinimumSize(new java.awt.Dimension(83, 25));
-        jBrs20.setPreferredSize(new java.awt.Dimension(83, 25));
-        jBrs20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBrs20ActionPerformed(evt);
-            }
-        });
-        jPDonations.add(jBrs20);
-
-        jBrs50.setText("R$ 50,00");
-        jBrs50.setPreferredSize(new java.awt.Dimension(83, 25));
-        jPDonations.add(jBrs50);
-
-        jBrs100.setText("R$ 100,00");
-        jPDonations.add(jBrs100);
-
-        jBrs200.setText("R$ 200,00");
-        jPDonations.add(jBrs200);
-
-        javax.swing.GroupLayout jPReceptorLayout = new javax.swing.GroupLayout(jPReceptor);
-        jPReceptor.setLayout(jPReceptorLayout);
-        jPReceptorLayout.setHorizontalGroup(
-            jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPReceptorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPDonations, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jSPMessages))
-                .addContainerGap())
-        );
-        jPReceptorLayout.setVerticalGroup(
-            jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPReceptorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSPMessages, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPDonations, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-        );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Digite uma mensagem: "));
 
@@ -211,35 +141,97 @@ public class Chat extends javax.swing.JFrame implements Runnable {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPReceptor1.setBorder(javax.swing.BorderFactory.createTitledBorder("Receptador"));
+
+        jEPMessages.setEditable(false);
+        jEPMessages.setContentType("text/html"); // NOI18N
+        jSPMessages1.setViewportView(jEPMessages);
+        jEPMessages.getAccessibleContext().setAccessibleName("");
+
+        jPDonations1.setBorder(javax.swing.BorderFactory.createTitledBorder("Doações"));
+
+        jBrs3.setText("R$ 2,00");
+        jBrs3.setMaximumSize(new java.awt.Dimension(83, 25));
+        jBrs3.setMinimumSize(new java.awt.Dimension(83, 25));
+        jBrs3.setPreferredSize(new java.awt.Dimension(83, 25));
+        jBrs3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBrs3ActionPerformed(evt);
+            }
+        });
+        jPDonations1.add(jBrs3);
+
+        jBrs11.setText("R$ 10,00");
+        jBrs11.setMaximumSize(new java.awt.Dimension(83, 25));
+        jBrs11.setMinimumSize(new java.awt.Dimension(83, 25));
+        jBrs11.setPreferredSize(new java.awt.Dimension(83, 25));
+        jPDonations1.add(jBrs11);
+
+        jBrs21.setText("R$ 20,00");
+        jBrs21.setMaximumSize(new java.awt.Dimension(83, 25));
+        jBrs21.setMinimumSize(new java.awt.Dimension(83, 25));
+        jBrs21.setPreferredSize(new java.awt.Dimension(83, 25));
+        jBrs21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBrs21ActionPerformed(evt);
+            }
+        });
+        jPDonations1.add(jBrs21);
+
+        jBrs51.setText("R$ 50,00");
+        jBrs51.setPreferredSize(new java.awt.Dimension(83, 25));
+        jPDonations1.add(jBrs51);
+
+        jBrs101.setText("R$ 100,00");
+        jPDonations1.add(jBrs101);
+
+        jBrs201.setText("R$ 200,00");
+        jPDonations1.add(jBrs201);
+
+        javax.swing.GroupLayout jPReceptor1Layout = new javax.swing.GroupLayout(jPReceptor1);
+        jPReceptor1.setLayout(jPReceptor1Layout);
+        jPReceptor1Layout.setHorizontalGroup(
+            jPReceptor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPReceptor1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPReceptor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPDonations1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jSPMessages1))
+                .addContainerGap())
+        );
+        jPReceptor1Layout.setVerticalGroup(
+            jPReceptor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPReceptor1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSPMessages1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPDonations1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPReceptor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPReceptor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPReceptor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPReceptor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBrs2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrs2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBrs2ActionPerformed
-
-    private void jBrs20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrs20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBrs20ActionPerformed
 
     private void jBSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSendMessageActionPerformed
         send();
@@ -251,19 +243,27 @@ public class Chat extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jTFMessageKeyPressed
 
+    private void jBrs3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrs3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBrs3ActionPerformed
+
+    private void jBrs21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrs21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBrs21ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSendMessage;
-    private javax.swing.JButton jBrs10;
-    private javax.swing.JButton jBrs100;
-    private javax.swing.JButton jBrs2;
-    private javax.swing.JButton jBrs20;
-    private javax.swing.JButton jBrs200;
-    private javax.swing.JButton jBrs50;
+    private javax.swing.JButton jBrs101;
+    private javax.swing.JButton jBrs11;
+    private javax.swing.JButton jBrs201;
+    private javax.swing.JButton jBrs21;
+    private javax.swing.JButton jBrs3;
+    private javax.swing.JButton jBrs51;
     private javax.swing.JEditorPane jEPMessages;
-    private javax.swing.JPanel jPDonations;
-    private javax.swing.JPanel jPReceptor;
+    private javax.swing.JPanel jPDonations1;
+    private javax.swing.JPanel jPReceptor1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jSPMessages;
+    private javax.swing.JScrollPane jSPMessages1;
     private javax.swing.JTextField jTFMessage;
     // End of variables declaration//GEN-END:variables
 

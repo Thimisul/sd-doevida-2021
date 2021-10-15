@@ -181,8 +181,8 @@ public class ServerConnect extends JFrame {
         try {
             // TODO add your handling code here:
             server = new Socket(tfServer.getText(), Integer.parseInt(tfBind.getText()));
-            new Login(server).setVisible(true);//que quer abrir
-            //new ChatReceptor(server).setVisible(true);//que quer abrir
+            //new Login(server).setVisible(true);//que quer abrir
+            new ChatReceptor(server).setVisible(true);//que quer abrir
             dispose();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
