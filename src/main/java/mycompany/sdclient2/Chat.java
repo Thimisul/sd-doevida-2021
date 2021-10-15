@@ -141,7 +141,7 @@ public class Chat extends javax.swing.JFrame implements Runnable {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPReceptor1.setBorder(javax.swing.BorderFactory.createTitledBorder("Receptador"));
+        jPReceptor1.setBorder(javax.swing.BorderFactory.createTitledBorder("Doador"));
 
         jEPMessages.setEditable(false);
         jEPMessages.setContentType("text/html"); // NOI18N

@@ -112,7 +112,7 @@ public class ChatReceptor extends javax.swing.JFrame implements Runnable {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(402, 479));
 
-        jPReceptor1.setBorder(javax.swing.BorderFactory.createTitledBorder("Receptador"));
+        jPReceptor1.setBorder(javax.swing.BorderFactory.createTitledBorder("Receptor"));
 
         jEPMessages.setEditable(false);
         jEPMessages.setContentType("text/html"); // NOI18N
