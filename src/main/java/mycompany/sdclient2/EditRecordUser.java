@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package mycompany.sdclient2;
+import java.net.Socket;
+
 
 import java.net.Socket;
 
@@ -12,14 +14,21 @@ import java.net.Socket;
  * @author lsilva
  */
 public class EditRecordUser extends javax.swing.JPanel {
-
+    Socket server;
     /**
      * Creates new form EditRecordUser
      */
     public EditRecordUser() {
+        this.server = server;
         initComponents();
+        start();
     }
 
+    public void start(){
+//        this.pack();
+        this.setVisible(true);
+    }
+    
     EditRecordUser(Socket connection) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -34,6 +43,7 @@ public class EditRecordUser extends javax.swing.JPanel {
     private void initComponents() {
 
         bGBusca = new javax.swing.ButtonGroup();
+        jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -49,6 +59,17 @@ public class EditRecordUser extends javax.swing.JPanel {
         jRBBuscalogin = new javax.swing.JRadioButton();
         jTFPesquisa = new javax.swing.JTextField();
         jBPesquisa = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar cadastro"));
 
@@ -187,8 +208,6 @@ public class EditRecordUser extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel1.getAccessibleContext().setAccessibleName("Editar cadastro");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFPesquisaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPesquisaFocusGained
@@ -200,6 +219,7 @@ public class EditRecordUser extends javax.swing.JPanel {
     private javax.swing.ButtonGroup bGBusca;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBPesquisa;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

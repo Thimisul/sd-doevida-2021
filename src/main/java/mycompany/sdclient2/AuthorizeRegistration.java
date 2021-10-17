@@ -5,6 +5,8 @@
  */
 package mycompany.sdclient2;
 
+import java.net.Socket;
+
 /**
  *
  * @author lsilva
@@ -16,6 +18,10 @@ public class AuthorizeRegistration extends javax.swing.JPanel {
      */
     public AuthorizeRegistration() {
         initComponents();
+    }
+
+    AuthorizeRegistration(Socket server) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

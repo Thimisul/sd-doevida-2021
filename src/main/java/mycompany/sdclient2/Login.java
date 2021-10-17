@@ -186,7 +186,6 @@ Socket connection;
         if (jRBDoador.isSelected()){
             Utils.sendMessage(connection, "dinho" + ":" + connection.getRemoteSocketAddress());
             new ReceptorsList(connection).setVisible(true);//que quer abrir
-            //new EditRecordUser(connection).setVisible(true);//que quer abrir
         }else if( jRBRecept.isSelected()){
             new Chat(connection).setVisible(true);//que quer abrir
         }else if(jRBAdmin.isSelected()){
