@@ -195,8 +195,6 @@ public class ChatReceptor extends javax.swing.JFrame implements Runnable {
                     .addGap(0, 138, Short.MAX_VALUE)))
         );
 
-        jPReceptor1.getAccessibleContext().setAccessibleName("Receptor");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

@@ -192,7 +192,7 @@ public class EditRecordUser extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFPesquisaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPesquisaFocusGained
-jTFPesquisa.setText("");        // TODO add your handling code here:
+       jTFPesquisa.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_jTFPesquisaFocusGained
 
 
