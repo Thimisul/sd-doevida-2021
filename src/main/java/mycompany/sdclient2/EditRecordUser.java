@@ -13,25 +13,25 @@ import java.net.Socket;
  *
  * @author lsilva
  */
-public class EditRecordUser extends javax.swing.JPanel {
+public class EditRecordUser extends javax.swing.JFrame {
     Socket server;
     /**
      * Creates new form EditRecordUser
      */
-    public EditRecordUser() {
-        this.server = server;
+    public EditRecordUser(Socket connection) {
+        this.server = connection;
         initComponents();
         start();
     }
 
     public void start(){
-//        this.pack();
+        this.pack();
         this.setVisible(true);
     }
     
-    EditRecordUser(Socket connection) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public EditRecordUser(Socket connection) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,7 +43,6 @@ public class EditRecordUser extends javax.swing.JPanel {
     private void initComponents() {
 
         bGBusca = new javax.swing.ButtonGroup();
-        jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,16 +59,10 @@ public class EditRecordUser extends javax.swing.JPanel {
         jTFPesquisa = new javax.swing.JTextField();
         jBPesquisa = new javax.swing.JButton();
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(420, 320));
+        setPreferredSize(new java.awt.Dimension(420, 310));
+        setSize(new java.awt.Dimension(430, 320));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar cadastro"));
 
@@ -192,8 +185,8 @@ public class EditRecordUser extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -205,7 +198,7 @@ public class EditRecordUser extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -219,7 +212,6 @@ public class EditRecordUser extends javax.swing.JPanel {
     private javax.swing.ButtonGroup bGBusca;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBPesquisa;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

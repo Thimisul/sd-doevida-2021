@@ -6,23 +6,32 @@
 package mycompany.sdclient2;
 
 import java.net.Socket;
+import javax.swing.JFrame;
 
 /**
  *
  * @author lsilva
  */
-public class AuthorizeRegistration extends javax.swing.JPanel {
+public class AuthorizeRegistration extends JFrame {
 
+    Socket server;
     /**
      * Creates new form AuthorizeRegistration
      */
-    public AuthorizeRegistration() {
+    public AuthorizeRegistration(Socket connection){
+        this.server = connection;
         initComponents();
+        start();
+    }
+    
+        public void start() {
+        this.pack();
+        this.setVisible(true);
     }
 
-    AuthorizeRegistration(Socket server) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    AuthorizeRegistration(Socket server) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

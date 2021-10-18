@@ -183,8 +183,9 @@ public class ServerConnect extends JFrame {
             server = new Socket(tfServer.getText(), Integer.parseInt(tfBind.getText()));
             //new Login(server).setVisible(true);//que quer abrir
             //new ChatReceptor(server).setVisible(true);//que quer abrir
-            //new EditRecordUser(server).setVisible(true); tá lançando a exception da linha 33. Não entendi o motivo
-            //new AuthorizeRegistration2(server).setVisible(true);
+            //new EditRecordUser(server).setVisible(true); // tá lançando a exception da linha 33. Não entendi o motivo
+            //new AuthorizeRegistration(server).setVisible(true);
+            new ReceptorsList(server).setVisible(true);
             dispose();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null,
