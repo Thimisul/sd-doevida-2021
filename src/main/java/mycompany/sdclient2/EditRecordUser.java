@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package mycompany.sdclient2;
-import java.net.Socket;
+
 
 
 import java.net.Socket;
@@ -17,6 +17,7 @@ public class EditRecordUser extends javax.swing.JFrame {
     Socket server;
     /**
      * Creates new form EditRecordUser
+     * @param connection
      */
     public EditRecordUser(Socket connection) {
         this.server = connection;
