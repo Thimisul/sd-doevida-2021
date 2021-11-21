@@ -23,6 +23,7 @@ public class Utils {
             ObjectOutputStream output = new ObjectOutputStream(connection.getOutputStream());
             output.flush();
             output.writeObject(message);
+            output.flush();
             System.out.println("Mensagem enviada: " + message);
             output.flush();
             return true;
