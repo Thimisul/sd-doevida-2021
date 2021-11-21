@@ -7,6 +7,10 @@ package mycompany.sdclient2;
 
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import utils.Utils;
 
 /**
@@ -56,6 +60,12 @@ Socket connection;
         jPReceptor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLLogin.setText("Login:");
+
+        jTFLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFLoginActionPerformed(evt);
+            }
+        });
 
         jLPassword.setText("Password:");
 
@@ -179,20 +189,46 @@ Socket connection;
     }//GEN-LAST:event_jRBDoadorActionPerformed
 
     private void jBCreateReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCreateReceptorActionPerformed
-        // TODO add your handling code here:
+        new ReceptorsCreate(connection).setVisible(true);//que quer abrir
+        dispose();
     }//GEN-LAST:event_jBCreateReceptorActionPerformed
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
-        if (jRBDoador.isSelected()){
-            Utils.sendMessage(connection, "dinho" + ":" + connection.getRemoteSocketAddress());
-            new ReceptorsList(connection).setVisible(true);//que quer abrir
-        }else if( jRBRecept.isSelected()){
-            new Chat(connection).setVisible(true);//que quer abrir
-        }else if(jRBAdmin.isSelected()){
-            new ReceptorsList(connection).setVisible(true);//que quer abrir
-        }
-        dispose();
+    try {
+        JSONObject login = new JSONObject();
+        JSONObject loginMessage = new JSONObject();
+        
+        loginMessage.put("username", jTFLogin.getText());
+        loginMessage.put("password", jPFPassword.getText());
+        login.put("protocol", 100);
+        login.put("message", loginMessage);
+        Utils.sendMessage(connection, login.toString());
+        String messageJson = Utils.receiveMessage(connection);
+        JSONObject jsonO = new JSONObject(messageJson);
+        Integer protocol = (Integer) jsonO.opt("protocol");
+        System.out.println("mensagem de resposta --->>>" + messageJson);
+            if(protocol == 101){
+                if (jRBDoador.isSelected()){
+                    new ReceptorsList(connection).setVisible(true);//que quer abrir
+                }else if( jRBRecept.isSelected()){
+                    new Chat(connection).setVisible(true);//que quer abrir
+                }else if(jRBAdmin.isSelected()){
+                    new ReceptorsList(connection).setVisible(true);//que quer abrir
+                }
+                dispose();
+            }else if(protocol == 102){
+                JSONObject jsonMessageO = new JSONObject(jsonO.opt("message"));
+                System.err.println(jsonMessageO.opt("reason")); 
+            }
+                
+    } catch (JSONException ex) {
+        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_jBLoginActionPerformed
+
+    private void jTFLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFLoginActionPerformed
 
     /**
      * @param args the command line arguments

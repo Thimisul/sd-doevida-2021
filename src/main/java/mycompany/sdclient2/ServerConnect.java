@@ -181,8 +181,8 @@ public class ServerConnect extends JFrame {
         try {
             // TODO add your handling code here:
             server = new Socket(tfServer.getText(), Integer.parseInt(tfBind.getText()));
-            new Chat(server).setVisible(true);//que quer abrir
-            //new Login(server).setVisible(true);//que quer abrir
+            //new Chat(server).setVisible(true);//que quer abrir
+            new Login(server).setVisible(true);//que quer abrir
             //new ChatReceptor(server).setVisible(true);//que quer abrir
             //new EditRecordUser(server).setVisible(true); // tá lançando a exception da linha 33. Não entendi o motivo
             //new AuthorizePending(server).setVisible(true);
