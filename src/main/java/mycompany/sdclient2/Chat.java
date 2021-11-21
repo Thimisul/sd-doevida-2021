@@ -52,8 +52,8 @@ public class Chat extends javax.swing.JFrame implements Runnable {
     public void newStart() {
         this.pack();
         this.setVisible(true);
-        Thread threadChat = new Thread(this);
-        threadChat.start();
+//        Thread threadChat = new Thread(this);
+//        threadChat.start();
         
     }
 
@@ -71,9 +71,19 @@ public class Chat extends javax.swing.JFrame implements Runnable {
             //saida = null;
             //saida = new ObjectOutputStream(server.getOutputStream());
             //saida.writeObject(jTFMessage.getText());
-            
+           
             Utils.sendMessage(server, jTFMessage.getText());
-            
+             if(jTFMessage.getText().equals("{ \"protocol\" : 199 }")){
+                try {
+                    server.close();
+                    System.out.println("Logout");
+                    setVisible(false); //you can't see me!
+                    dispose(); //Destroy the JFrame object
+                } catch (IOException ex) {
+                    Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 
+            }
             DateFormat df = new SimpleDateFormat("hh:mm:ss");
             append_message("<b>[" + df.format(new Date()) + "] Eu: <b><i>" + jTFMessage.getText() + "</i><br>");
             jTFMessage.setText("");
@@ -270,11 +280,13 @@ public class Chat extends javax.swing.JFrame implements Runnable {
     @Override
     public void run() {
          DateFormat df = new SimpleDateFormat("hh:mm:ss");
-        while (true) {        
+         System.out.println("Servidor está conectado" + server.isConnected());
+        while (server.isConnected()) {        
                 String msgReceive = Utils.receiveMessage(server);
              try {
                  append_message("<b>[" + df.format(new Date()) + "]"+  server.getOutputStream() + " : <b><i>" + msgReceive + "</i><br>");
              } catch (IOException ex) {
+                 System.out.println("erro aki");
                  Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
              }
         }
