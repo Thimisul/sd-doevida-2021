@@ -50,14 +50,10 @@ Socket connection;
         jPFPassword = new javax.swing.JPasswordField();
         jBLogin = new javax.swing.JButton();
         jBCreateReceptor = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jRBDoador = new javax.swing.JRadioButton();
-        jRBRecept = new javax.swing.JRadioButton();
-        jRBAdmin = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPReceptor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPReceptor.setBorder(javax.swing.BorderFactory.createTitledBorder("Bem Vindo"));
 
         jLLogin.setText("Login:");
 
@@ -83,43 +79,6 @@ Socket connection;
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("EU SOU"));
-
-        BTGiAm.add(jRBDoador);
-        jRBDoador.setText("Doador");
-        jRBDoador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBDoadorActionPerformed(evt);
-            }
-        });
-
-        BTGiAm.add(jRBRecept);
-        jRBRecept.setText("Receptor");
-
-        BTGiAm.add(jRBAdmin);
-        jRBAdmin.setText("Admin");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRBRecept)
-                    .addComponent(jRBAdmin)
-                    .addComponent(jRBDoador))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jRBDoador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRBRecept)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRBAdmin))
-        );
-
         javax.swing.GroupLayout jPReceptorLayout = new javax.swing.GroupLayout(jPReceptor);
         jPReceptor.setLayout(jPReceptorLayout);
         jPReceptorLayout.setHorizontalGroup(
@@ -127,37 +86,30 @@ Socket connection;
             .addGroup(jPReceptorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCreateReceptor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
                     .addGroup(jPReceptorLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLPassword)
-                            .addComponent(jLLogin))
+                            .addComponent(jLLogin)
+                            .addComponent(jLPassword))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPFPassword)
-                            .addComponent(jTFLogin)))
-                    .addComponent(jBLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBCreateReceptor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+                            .addComponent(jTFLogin))))
                 .addContainerGap())
         );
         jPReceptorLayout.setVerticalGroup(
             jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPReceptorLayout.createSequentialGroup()
-                .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPReceptorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPReceptorLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLLogin, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTFLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLPassword)
-                            .addComponent(jPFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLLogin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPReceptorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLPassword)
+                    .addComponent(jPFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jBLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBCreateReceptor)
@@ -175,18 +127,14 @@ Socket connection;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPReceptor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jRBDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBDoadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRBDoadorActionPerformed
 
     private void jBCreateReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCreateReceptorActionPerformed
         new ReceptorsCreate(connection).setVisible(true);//que quer abrir
@@ -243,10 +191,6 @@ Socket connection;
     private javax.swing.JLabel jLPassword;
     private javax.swing.JPasswordField jPFPassword;
     private javax.swing.JPanel jPReceptor;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRBAdmin;
-    private javax.swing.JRadioButton jRBDoador;
-    private javax.swing.JRadioButton jRBRecept;
     private javax.swing.JTextField jTFLogin;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,6 +59,8 @@ public class EditRecordUser extends javax.swing.JFrame {
         jRBBuscalogin = new javax.swing.JRadioButton();
         jTFPesquisa = new javax.swing.JTextField();
         jBPesquisa = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jCBpendingDonation = new javax.swing.JCheckBox();
 
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(420, 320));
@@ -136,6 +138,13 @@ public class EditRecordUser extends javax.swing.JFrame {
 
         jRBBuscalogin.getAccessibleContext().setAccessibleName("");
 
+        jCBpendingDonation.setText("Quero receber doações");
+        jCBpendingDonation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBpendingDonationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,7 +167,12 @@ public class EditRecordUser extends javax.swing.JFrame {
                             .addComponent(jTFNome)
                             .addComponent(jTFLogin)
                             .addComponent(jPFSenha)))
-                    .addComponent(jBEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCBpendingDonation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -181,7 +195,11 @@ public class EditRecordUser extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jPFRepitaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(6, 6, 6)
+                .addComponent(jCBpendingDonation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBEditar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -199,7 +217,7 @@ public class EditRecordUser extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -208,15 +226,21 @@ public class EditRecordUser extends javax.swing.JFrame {
        jTFPesquisa.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_jTFPesquisaFocusGained
 
+    private void jCBpendingDonationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBpendingDonationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBpendingDonationActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGBusca;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBPesquisa;
+    private javax.swing.JCheckBox jCBpendingDonation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPFRepitaSenha;
     private javax.swing.JPasswordField jPFSenha;
     private javax.swing.JPanel jPanel1;
