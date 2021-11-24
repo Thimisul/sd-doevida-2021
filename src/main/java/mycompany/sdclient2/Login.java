@@ -156,13 +156,7 @@ Socket connection;
         Integer protocol = (Integer) jsonO.opt("protocol");
         System.out.println("mensagem de resposta --->>>" + messageJson);
             if(protocol == 101){
-                if (jRBDoador.isSelected()){
-                    new ReceptorsList(connection).setVisible(true);//que quer abrir
-                }else if( jRBRecept.isSelected()){
-                    new Chat(connection).setVisible(true);//que quer abrir
-                }else if(jRBAdmin.isSelected()){
-                    new ReceptorsList(connection).setVisible(true);//que quer abrir
-                }
+                System.out.println("Login ok");
                 dispose();
             }else if(protocol == 102){
                 JSONObject jsonMessageO = new JSONObject(jsonO.opt("message"));
