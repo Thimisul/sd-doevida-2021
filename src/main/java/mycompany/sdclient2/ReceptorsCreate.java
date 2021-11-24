@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Utils;
@@ -19,19 +20,18 @@ import utils.Utils;
  */
 public class ReceptorsCreate extends javax.swing.JFrame {
 
-Socket server;
+    Socket server;
+    Socket connection;
     private String receptor;
     ObjectOutputStream saida;
 
-    
     ReceptorsCreate(Socket server) {
         this.server = server;
         initComponents();
         start();
     }
 
-    
-    public void start(){
+    public void start() {
         this.pack();
         this.setVisible(true);
     }
@@ -56,9 +56,6 @@ Socket server;
         jPFpassword = new javax.swing.JPasswordField();
         jPFConfirmPassword = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jRBDoador = new javax.swing.JRadioButton();
-        jRBReceptor = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,42 +84,6 @@ Socket server;
 
         jLabel6.setText("Conectado");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("EU SOU"));
-
-        jRBDoador.setText("Doador");
-        jRBDoador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBDoadorActionPerformed(evt);
-            }
-        });
-
-        jRBReceptor.setText("Receptor");
-        jRBReceptor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBReceptorActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jRBDoador)
-                .addGap(18, 18, 18)
-                .addComponent(jRBReceptor)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRBDoador)
-                    .addComponent(jRBReceptor))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,7 +91,6 @@ Socket server;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -173,8 +133,6 @@ Socket server;
                     .addComponent(jLabel4)
                     .addComponent(jPFConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -200,34 +158,44 @@ Socket server;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    try {
-        JSONObject userCreate = new JSONObject();
-        JSONObject userCreateMessage = new JSONObject();
-        
-        userCreateMessage.put("name", jTFName.getText());
-        userCreateMessage.put("username", jTFLogin.getText());
-        userCreateMessage.put("password", jPFpassword.getText());
-        userCreate.put("protocol", 700);
-        userCreate.put("message", userCreateMessage);
-        
-        Utils.sendMessage(server, userCreate.toString());
-        
-    } catch (JSONException ex) {
-        Logger.getLogger(ReceptorsCreate.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            JSONObject userCreate = new JSONObject();
+            JSONObject userCreateMessage = new JSONObject();
 
-    private void jRBDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBDoadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRBDoadorActionPerformed
+            userCreateMessage.put("name", jTFName.getText());
+            userCreateMessage.put("username", jTFLogin.getText());
+            userCreateMessage.put("password", jPFpassword.getText());
+            userCreate.put("protocol", 700);
+            userCreate.put("message", userCreateMessage);
+
+            Utils.sendMessage(server, userCreate.toString());
+
+            String retorno = Utils.receiveMessage(server);
+            JSONObject retornoJSON = new JSONObject(retorno);
+            if ((boolean) retornoJSON.opt("result")) {
+                JOptionPane.showMessageDialog(null,
+                        "Usuário cadastrado com sucesso:\n\n", //mensagem
+                        "SUCESSO",
+                        JOptionPane.OK_OPTION);
+                System.out.println("Usuário cadastrado com sucesso");
+                LandingPage landingPage = new LandingPage(connection);
+                dispose();
+            } else {
+                        JOptionPane.showMessageDialog(null,
+                        "Usuario já cadastrado:\n\n", //mensagem
+                        "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+                System.out.println("Usuário já cadastrado");
+            }
+
+        } catch (JSONException ex) {
+            Logger.getLogger(ReceptorsCreate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNameActionPerformed
-
-    private void jRBReceptorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBReceptorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRBReceptorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -240,9 +208,6 @@ Socket server;
     private javax.swing.JPasswordField jPFConfirmPassword;
     private javax.swing.JPasswordField jPFpassword;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRBDoador;
-    private javax.swing.JRadioButton jRBReceptor;
     private javax.swing.JTextField jTFLogin;
     private javax.swing.JTextField jTFName;
     // End of variables declaration//GEN-END:variables

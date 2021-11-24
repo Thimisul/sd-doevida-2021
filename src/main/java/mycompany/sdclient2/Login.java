@@ -157,6 +157,7 @@ Socket connection;
         System.out.println("mensagem de resposta --->>>" + messageJson);
             if(protocol == 101){
                 System.out.println("Login ok");
+                new LandingPage(connection);
                 dispose();
             }else if(protocol == 102){
                 JSONObject jsonMessageO = new JSONObject(jsonO.opt("message"));
