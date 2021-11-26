@@ -7,6 +7,10 @@ package mycompany.sdclient2;
 
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import javax.swing.JOptionPane;
+import org.json.JSONException;
+import org.json.JSONObject;
+import utils.Utils;
 
 /**
  *
@@ -117,7 +121,7 @@ public class LandingPage extends javax.swing.JFrame {
 
     private void jBEditarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarCadastroActionPerformed
         new EditRecordUser(connection).setVisible(true);//que quer abrir
-// Mandar o json solicitando os dados
+        // Mandar o json solicitando os dados
         //Abrir a tela e colocar nos campos
         //Mandar novamente
         //Esperar a mensagem
@@ -125,7 +129,20 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEditarCadastroActionPerformed
 
     private void jBLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogoutActionPerformed
-        // Mandar json do logout
+        try{
+            JSONObject logout = new JSONObject();
+            
+            logout.put("protocol", 199);
+            Utils.sendMessage(connection, logout.toString());
+            new Login(connection);
+            dispose();
+            
+        } catch (JSONException ex){
+            JOptionPane.showMessageDialog(rootPane, "Mensagem " + ex,"Erro ao deslogar",JOptionPane.ERROR_MESSAGE);
+                    
+        }
+
+// Mandar json do logout
         //Esperar a mensagem
         //Fechar tudo e abrir a tela de login
     }//GEN-LAST:event_jBLogoutActionPerformed
