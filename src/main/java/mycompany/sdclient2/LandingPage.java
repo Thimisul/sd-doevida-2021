@@ -7,6 +7,8 @@ package mycompany.sdclient2;
 
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,12 +35,12 @@ public class LandingPage extends javax.swing.JFrame {
         initComponents();
         start();
     }
-    
-    private void start(){
+
+    private void start() {
         this.pack();
         this.setExtendedState(MAXIMIZED_BOTH);
-        this.setVisible(true); 
-   }
+        this.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,6 +123,18 @@ public class LandingPage extends javax.swing.JFrame {
 
     private void jBEditarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarCadastroActionPerformed
         new EditRecordUser(connection).setVisible(true);//que quer abrir
+
+        JSONObject editar = new JSONObject();
+        try {
+            editar.put("protocol", 710);
+            Utils.sendMessage(connection, editar.toString());
+            String messageJson = Utils.receiveMessage(connection);
+        } catch (JSONException ex) {
+            Logger.getLogger(LandingPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Utils.sendMessage(connection, editar.toString());
+        String messageJson = Utils.receiveMessage(connection);
         // Mandar o json solicitando os dados
         //Abrir a tela e colocar nos campos
         //Mandar novamente
@@ -129,22 +143,18 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEditarCadastroActionPerformed
 
     private void jBLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogoutActionPerformed
-        try{
+        try {
             JSONObject logout = new JSONObject();
-            
+
             logout.put("protocol", 199);
             Utils.sendMessage(connection, logout.toString());
             new Login(connection);
             dispose();
-            
-        } catch (JSONException ex){
-            JOptionPane.showMessageDialog(rootPane, "Mensagem " + ex,"Erro ao deslogar",JOptionPane.ERROR_MESSAGE);
-                    
-        }
 
-// Mandar json do logout
-        //Esperar a mensagem
-        //Fechar tudo e abrir a tela de login
+        } catch (JSONException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Mensagem " + ex, "Erro ao deslogar", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_jBLogoutActionPerformed
 
     /**
