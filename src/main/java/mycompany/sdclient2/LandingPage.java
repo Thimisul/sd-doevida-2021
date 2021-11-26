@@ -129,12 +129,12 @@ public class LandingPage extends javax.swing.JFrame {
             editar.put("protocol", 710);
             Utils.sendMessage(connection, editar.toString());
             String messageJson = Utils.receiveMessage(connection);
+            //aqui aguardando grupo: será username como variável global ou vai vir o retorno do username pelo login?
         } catch (JSONException ex) {
             Logger.getLogger(LandingPage.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Mensagem" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
-        Utils.sendMessage(connection, editar.toString());
-        String messageJson = Utils.receiveMessage(connection);
         // Mandar o json solicitando os dados
         //Abrir a tela e colocar nos campos
         //Mandar novamente
