@@ -124,9 +124,12 @@ public class LandingPage extends javax.swing.JFrame {
     private void jBEditarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarCadastroActionPerformed
         new EditRecordUser(connection).setVisible(true);//que quer abrir
 
-        JSONObject editar = new JSONObject();
         try {
+            JSONObject editar = new JSONObject();
+            JSONObject editarMessage = new JSONObject();
             editar.put("protocol", 710);
+            editarMessage.put("username",Login.usernameglobal);
+            System.out.println("Da landing page do protocolo 710" + Login.usernameglobal);
             Utils.sendMessage(connection, editar.toString());
             String messageJson = Utils.receiveMessage(connection);
             //aqui aguardando grupo: será username como variável global ou vai vir o retorno do username pelo login?

@@ -19,19 +19,20 @@ import utils.Utils;
  */
 public class Login extends javax.swing.JFrame {
 
-Socket connection;
+    Socket connection;
     ObjectOutputStream saida;
+    static String usernameglobal;
 
-    public Login(Socket connection) { 
+    public Login(Socket connection) {
         this.connection = connection;
         initComponents();
         start();
     }
 
-    private void start(){
+    private void start() {
         this.pack();
-        this.setVisible(true); 
-   }
+        this.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,31 +143,33 @@ Socket connection;
     }//GEN-LAST:event_jBCreateReceptorActionPerformed
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
-    try {
-        JSONObject login = new JSONObject();
-        JSONObject loginMessage = new JSONObject();
-        
-        loginMessage.put("username", jTFLogin.getText());
-        loginMessage.put("password", jPFPassword.getText());
-        login.put("protocol", 100);
-        login.put("message", loginMessage);
-        Utils.sendMessage(connection, login.toString());
-        String messageJson = Utils.receiveMessage(connection);
-        JSONObject jsonO = new JSONObject(messageJson);
-        Integer protocol = (Integer) jsonO.opt("protocol");
-        System.out.println("mensagem de resposta --->>>" + messageJson);
-            if(protocol == 101){
+        try {
+            JSONObject login = new JSONObject();
+            JSONObject loginMessage = new JSONObject();
+
+            loginMessage.put("username", jTFLogin.getText());
+            loginMessage.put("password", jPFPassword.getText());
+            login.put("protocol", 100);
+            login.put("message", loginMessage);
+            Utils.sendMessage(connection, login.toString());
+            String messageJson = Utils.receiveMessage(connection);
+            JSONObject jsonO = new JSONObject(messageJson);
+            Integer protocol = (Integer) jsonO.opt("protocol");
+            System.out.println("mensagem de resposta --->>>" + messageJson);
+            usernameglobal = jTFLogin.getText();
+            System.out.println(usernameglobal);
+            if (protocol == 101) {
                 System.out.println("Login ok");
                 new LandingPage(connection);
                 dispose();
-            }else if(protocol == 102){
+            } else if (protocol == 102) {
                 JSONObject jsonMessageO = new JSONObject(jsonO.opt("message"));
-                System.err.println(jsonMessageO.opt("reason")); 
+                System.err.println(jsonMessageO.opt("reason"));
             }
-                
-    } catch (JSONException ex) {
-        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-    }
+
+        } catch (JSONException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jBLoginActionPerformed
 
     private void jTFLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFLoginActionPerformed
@@ -176,7 +179,6 @@ Socket connection;
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BTGiAm;
