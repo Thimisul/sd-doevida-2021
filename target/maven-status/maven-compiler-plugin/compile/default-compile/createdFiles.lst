@@ -5,6 +5,7 @@ mycompany\sdclient2\Chat$2.class
 mycompany\sdclient2\EditRecordUser$2.class
 mycompany\sdclient2\EditRecordUser.class
 mycompany\sdclient2\LandingPage.class
+mycompany\sdclient2\entidades\User.class
 mycompany\sdclient2\AuthorizePending.class
 mycompany\sdclient2\ChatReceptor.class
 mycompany\sdclient2\ReceptorsList$2.class

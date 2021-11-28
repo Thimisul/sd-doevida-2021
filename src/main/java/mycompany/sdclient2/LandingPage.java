@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import mycompany.sdclient2.entidades.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Utils;
@@ -122,17 +123,34 @@ public class LandingPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBEditarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarCadastroActionPerformed
-        new EditRecordUser(connection).setVisible(true);//que quer abrir
+
 
         try {
             JSONObject editar = new JSONObject();
             JSONObject editarMessage = new JSONObject();
             editar.put("protocol", 710);
+            editar.put("message", editarMessage);
             editarMessage.put("username",Login.usernameglobal);
-            System.out.println("Da landing page do protocolo 710" + Login.usernameglobal);
+            //System.out.println("Da landing page do protocolo 710" + Login.usernameglobal);
             Utils.sendMessage(connection, editar.toString());
             String messageJson = Utils.receiveMessage(connection);
-            //aqui aguardando grupo: será username como variável global ou vai vir o retorno do username pelo login?
+            JSONObject jsonO = new JSONObject(messageJson);
+            JSONObject messageO = new JSONObject(jsonO.optString("message"));
+            Integer protocol = (Integer) jsonO.opt("protocol"); 
+            System.out.println("mensagem de resposta --->>>" + messageJson);
+            User userEdit = new User(
+                                    null, 
+                                    messageO. optString("name"), 
+                                    null, 
+                                    0,
+                                    messageO.optString("city"), //cidade
+                                    messageO.optString("federative_unit"), //Estado
+                                    messageO.optInt("receptor"), //Validado
+                                    null //senha
+                                    );
+            new EditRecordUser(connection, userEdit);//que quer abrir
+            System.out.println("veio da landing page no final de tudo " + userEdit.getName());
+            
         } catch (JSONException ex) {
             Logger.getLogger(LandingPage.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, "Mensagem" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
@@ -140,7 +158,7 @@ public class LandingPage extends javax.swing.JFrame {
 
         // Mandar o json solicitando os dados
         //Abrir a tela e colocar nos campos
-        //Mandar novamente
+        //Mandar novamente pela tela de Editrecorder
         //Esperar a mensagem
         //Fechar a tela
     }//GEN-LAST:event_jBEditarCadastroActionPerformed

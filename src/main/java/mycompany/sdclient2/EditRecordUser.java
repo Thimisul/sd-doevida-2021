@@ -8,6 +8,7 @@ package mycompany.sdclient2;
 
 
 import java.net.Socket;
+import mycompany.sdclient2.entidades.User;
 
 /**
  *
@@ -15,19 +16,26 @@ import java.net.Socket;
  */
 public class EditRecordUser extends javax.swing.JFrame {
     Socket server;
+    User userEdit;
     /**
      * Creates new form EditRecordUser
      * @param connection
+     * @param userEdit
      */
-    public EditRecordUser(Socket connection) {
+    public EditRecordUser(Socket connection, User userEdit) {
         this.server = connection;
+        this.userEdit = userEdit;
+        System.out.println("veio no editRecord " + this.userEdit.getName());
         initComponents();
+        jTFNome.setText(userEdit.getName());
         start();
+
     }
 
     public void start(){
         this.pack();
         this.setVisible(true);
+        System.out.println("veio no editRecord metodo start " + this.userEdit.getName());
     }
     
 //    public EditRecordUser(Socket connection) {
@@ -46,12 +54,10 @@ public class EditRecordUser extends javax.swing.JFrame {
         bGBusca = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jBEditar = new javax.swing.JButton();
         jTFNome = new javax.swing.JTextField();
-        jTFLogin = new javax.swing.JTextField();
         jPFSenha = new javax.swing.JPasswordField();
         jPFRepitaSenha = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
@@ -67,18 +73,19 @@ public class EditRecordUser extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
-        jLabel2.setText("Login:");
-
         jLabel3.setText("Senha:");
 
         jLabel4.setText("Repita a senha:");
 
         jBEditar.setLabel("Editar");
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
+            }
+        });
 
         jTFNome.setActionCommand("<Not Set>");
         jTFNome.setEnabled(false);
-
-        jTFLogin.setEnabled(false);
 
         jPFSenha.setEnabled(false);
 
@@ -104,24 +111,20 @@ public class EditRecordUser extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(jTFNome))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTFLogin))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPFSenha))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPFRepitaSenha))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(139, 139, 139)
                                 .addComponent(jLabel5))
                             .addComponent(jCBpendingDonation))
-                        .addGap(0, 211, Short.MAX_VALUE)))
+                        .addGap(0, 211, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPFRepitaSenha)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -132,18 +135,14 @@ public class EditRecordUser extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTFLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jPFRepitaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jPFRepitaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(37, 37, 37)
                 .addComponent(jCBpendingDonation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBEditar)
@@ -174,20 +173,28 @@ public class EditRecordUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBpendingDonationActionPerformed
 
+    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+        //Fazer um if: se o campo receptor recebido via json (vindo pela landing page) estava como 99 e o usuário
+        //marcar a flag de "Quero receber doações na interface, ele envia 0 que é pendente.
+        //Se ele já vier como 1 que seria validado, essa flag já tem q existir. Contudo deve ser disable
+        //Se ele vier como 0, a flag ficaria como disable também. Pois significa que está aguardando ser ou não
+        //Um receptor
+        System.out.println("veio do bot");
+        jTFNome.setText(userEdit.getName());
+    }//GEN-LAST:event_jBEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGBusca;
     private javax.swing.JButton jBEditar;
     private javax.swing.JCheckBox jCBpendingDonation;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPFRepitaSenha;
     private javax.swing.JPasswordField jPFSenha;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTFLogin;
     private javax.swing.JTextField jTFNome;
     // End of variables declaration//GEN-END:variables
 }
