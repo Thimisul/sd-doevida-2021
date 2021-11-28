@@ -170,6 +170,7 @@ public class LandingPage extends javax.swing.JFrame {
             logout.put("protocol", 199);
             Utils.sendMessage(connection, logout.toString());
             new Login(connection);
+            JOptionPane.showMessageDialog(rootPane, "Até logo");
             dispose();
 
         } catch (JSONException ex) {

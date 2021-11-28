@@ -181,6 +181,12 @@ public class EditRecordUser extends javax.swing.JFrame {
         //Um receptor
         System.out.println("veio do bot");
         jTFNome.setText(userEdit.getName());
+        //campos enabled na interface
+        //if citado acima
+        //montar o json para salvar
+        //no servidor, ajustar o método pra salvar no banco
+        //retornar o true ou false para a interface
+        //dar um dispose() para fechar a tela e retornar para a landing page
     }//GEN-LAST:event_jBEditarActionPerformed
 
 
