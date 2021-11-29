@@ -124,7 +124,6 @@ public class LandingPage extends javax.swing.JFrame {
 
     private void jBEditarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarCadastroActionPerformed
 
-
         try {
             JSONObject editar = new JSONObject();
             JSONObject editarMessage = new JSONObject();
@@ -156,7 +155,7 @@ public class LandingPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Mensagem" + ex, "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
-        // Mandar o json solicitando os dados
+        //Mandar o json solicitando os dados
         //Abrir a tela e colocar nos campos
         //Mandar novamente pela tela de Editrecorder
         //Esperar a mensagem
@@ -169,13 +168,12 @@ public class LandingPage extends javax.swing.JFrame {
 
             logout.put("protocol", 199);
             Utils.sendMessage(connection, logout.toString());
-            new Login(connection);
             JOptionPane.showMessageDialog(rootPane, "Até logo");
             dispose();
+            new Login(connection);
 
         } catch (JSONException ex) {
             JOptionPane.showMessageDialog(rootPane, "Mensagem " + ex, "Erro ao deslogar", JOptionPane.ERROR_MESSAGE);
-
         }
     }//GEN-LAST:event_jBLogoutActionPerformed
 
