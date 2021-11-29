@@ -2,6 +2,7 @@ mycompany\sdclient2\ChatReceptor$2.class
 mycompany\sdclient2\LandingPage$3.class
 mycompany\sdclient2\ServerConnect$1.class
 mycompany\sdclient2\Chat$2.class
+mycompany\sdclient2\EditRecordUser$4.class
 mycompany\sdclient2\EditRecordUser$2.class
 mycompany\sdclient2\EditRecordUser.class
 mycompany\sdclient2\LandingPage.class
@@ -31,3 +32,4 @@ mycompany\sdclient2\ReceptorsList$1.class
 mycompany\sdclient2\ReceptorsList.class
 mycompany\sdclient2\ServerConnect$2.class
 mycompany\sdclient2\Login$3.class
+mycompany\sdclient2\EditRecordUser$3.class
