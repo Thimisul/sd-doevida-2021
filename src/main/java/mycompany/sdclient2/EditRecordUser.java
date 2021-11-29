@@ -248,6 +248,11 @@ public class EditRecordUser extends javax.swing.JFrame {
                 String messageJson = Utils.receiveMessage(connection);
                 JSONObject jsonO = new JSONObject(messageJson);
                 System.out.println("mensagem de resposta --->>>" + messageJson);
+                if (jsonO.optInt("protocol") == 721){
+                    JOptionPane.showMessageDialog(rootPane, "Usuário alterado com sucesso!");
+                    dispose();
+                    //LandingPage landingpage = new LandingPage(connection);
+                }
             } catch (JSONException ex) {
                 Logger.getLogger(EditRecordUser.class.getName()).log(Level.SEVERE, null, ex);
             }

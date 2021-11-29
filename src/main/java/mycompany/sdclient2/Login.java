@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Utils;
@@ -143,32 +144,37 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCreateReceptorActionPerformed
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
-        try {
-            JSONObject login = new JSONObject();
-            JSONObject loginMessage = new JSONObject();
+        if ("".equals(jTFLogin.getText()) || "".equals(jPFPassword.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "Campo Login ou senha vazios, verifique");
+        } else {
+            try {
+                JSONObject login = new JSONObject();
+                JSONObject loginMessage = new JSONObject();
 
-            loginMessage.put("username", jTFLogin.getText());
-            loginMessage.put("password", jPFPassword.getText());
-            login.put("protocol", 100);
-            login.put("message", loginMessage);
-            Utils.sendMessage(connection, login.toString());
-            String messageJson = Utils.receiveMessage(connection);
-            JSONObject jsonO = new JSONObject(messageJson);
-            Integer protocol = (Integer) jsonO.opt("protocol");
-            System.out.println("mensagem de resposta --->>>" + messageJson);
-            usernameglobal = jTFLogin.getText();
-            System.out.println(usernameglobal);
-            if (protocol == 101) {
-                System.out.println("Login ok");
-                new LandingPage(connection);
-                dispose();
-            } else if (protocol == 102) {
-                JSONObject jsonMessageO = new JSONObject(jsonO.opt("message"));
-                System.err.println(jsonMessageO.opt("reason"));
+                loginMessage.put("username", jTFLogin.getText());
+                loginMessage.put("password", jPFPassword.getText());
+                login.put("protocol", 100);
+                login.put("message", loginMessage);
+                Utils.sendMessage(connection, login.toString());
+                String messageJson = Utils.receiveMessage(connection);
+                JSONObject jsonO = new JSONObject(messageJson);
+                Integer protocol = (Integer) jsonO.opt("protocol");
+                System.out.println("mensagem de resposta --->>>" + messageJson);
+                usernameglobal = jTFLogin.getText();
+                System.out.println(usernameglobal);
+                if (protocol == 101) {
+                    System.out.println("Login ok");
+                    new LandingPage(connection);
+                    dispose();
+                } else if (protocol == 102) {
+                    JSONObject jsonMessageO = new JSONObject(jsonO.optString("message"));
+                    System.err.println(jsonMessageO.optString("reason"));
+                    JOptionPane.showMessageDialog(rootPane, "Falha no login. Verifique seus dados e tente novamente \n " + "O servidor retornou: " + jsonMessageO.optString("reason"));
+                }
+
+            } catch (JSONException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (JSONException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBLoginActionPerformed
 

@@ -20,13 +20,12 @@ import utils.Utils;
  */
 public class ReceptorsCreate extends javax.swing.JFrame {
 
-    Socket server;
     Socket connection;
     private String receptor;
     ObjectOutputStream saida;
 
     ReceptorsCreate(Socket server) {
-        this.server = server;
+        this.connection = server;
         initComponents();
         start();
     }
@@ -191,40 +190,46 @@ public class ReceptorsCreate extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            JSONObject userCreate = new JSONObject();
-            JSONObject userCreateMessage = new JSONObject();
+        if ("".equals(jTFLogin.getText()) || "".equals(jTFName.getText()) || "".equals(jPFpassword.getText()) || "".equals(jPFConfirmPassword.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "Há campos em branco. Verifique!");
+        } else if (jPFpassword.getText().equals(jPFConfirmPassword.getText())) {
+            try {
+                JSONObject userCreate = new JSONObject();
+                JSONObject userCreateMessage = new JSONObject();
 
-            userCreateMessage.put("name", jTFName.getText());
-            userCreateMessage.put("username", jTFLogin.getText());
-            userCreateMessage.put("city", jTFCidade.getText());
-            userCreateMessage.put("state", Utils.federativeUnit[jComboEstado.getSelectedIndex()]);
-            userCreateMessage.put("password", jPFpassword.getText());
-            userCreate.put("protocol", 700);
-            userCreate.put("message", userCreateMessage);
+                userCreateMessage.put("name", jTFName.getText());
+                userCreateMessage.put("username", jTFLogin.getText());
+                userCreateMessage.put("city", jTFCidade.getText());
+                userCreateMessage.put("state", Utils.federativeUnit[jComboEstado.getSelectedIndex()]);
+                userCreateMessage.put("password", jPFpassword.getText());
+                userCreate.put("protocol", 700);
+                userCreate.put("message", userCreateMessage);
 
-            Utils.sendMessage(server, userCreate.toString());
+                Utils.sendMessage(connection, userCreate.toString());
 
-            String retorno = Utils.receiveMessage(server);
-            JSONObject retornoJSON = new JSONObject(retorno);
-            if ((boolean) retornoJSON.opt("result")) {
-                JOptionPane.showMessageDialog(null,
-                        "Usuário cadastrado com sucesso:\n\n", //mensagem
-                        "SUCESSO",
-                        JOptionPane.OK_OPTION);
-                System.out.println("Usuário cadastrado com sucesso");
-                LandingPage landingPage = new LandingPage(connection);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "Usuario já cadastrado:\n\n", //mensagem
-                        "ERRO",
-                        JOptionPane.ERROR_MESSAGE);
-                System.out.println("Usuário já cadastrado");
+                String retorno = Utils.receiveMessage(connection);
+                JSONObject retornoJSON = new JSONObject(retorno);
+                if (retornoJSON.optInt("protocol") == 701) {
+                    JOptionPane.showMessageDialog(rootPane, "Cadastro efetuado com sucesso");
+                    System.out.println("Usuário cadastrado com sucesso");
+                    //LandingPage landingPage = new LandingPage(connection);
+                    dispose();
+                    Login loginpage = new Login(connection);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Usuario já cadastrado:\n\n", //mensagem
+                            "ERRO",
+                            JOptionPane.ERROR_MESSAGE);
+                    System.out.println("Usuário já cadastrado");
+                }
+            } catch (JSONException ex) {
+                Logger.getLogger(ReceptorsCreate.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (JSONException ex) {
-            Logger.getLogger(ReceptorsCreate.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "As senhas não são iguais. Digite novamente");
+            System.out.println("Senha: " + jPFpassword.getText() + "/n" + "Repita senha: " + jPFConfirmPassword.getText());
+            jPFpassword.setText("");
+            jPFConfirmPassword.setText("");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
