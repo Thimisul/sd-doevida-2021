@@ -144,7 +144,7 @@ public class LandingPage extends javax.swing.JFrame {
                                     null, 
                                     0,
                                     messageO.optString("city"), //cidade
-                                    messageO.optString("federative_unit"), //Estado
+                                    messageO.optString("state"), //Estado
                                     messageO.optInt("receptor"), //Validado
                                     null //senha
                                     );

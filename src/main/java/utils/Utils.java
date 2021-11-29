@@ -17,7 +17,8 @@ import java.util.logging.Logger;
  * @author thi_s
  */
 public class Utils {
-
+    public static String federativeUnit[]={"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
+    
     public static boolean sendMessage(Socket connection, String message) {
         try {
             ObjectOutputStream output = new ObjectOutputStream(connection.getOutputStream());
