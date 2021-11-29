@@ -139,16 +139,22 @@ public class LandingPage extends javax.swing.JFrame {
             JSONObject messageO = new JSONObject(jsonO.optString("message"));
             Integer protocol = (Integer) jsonO.opt("protocol"); 
             System.out.println("mensagem de resposta --->>>" + messageJson);
-            User userEdit = new User(
-                                    null, 
-                                    messageO. optString("name"), 
-                                    null, 
-                                    0,
-                                    messageO.optString("city"), //cidade
-                                    messageO.optString("state"), //Estado
-                                    messageO.optInt("receptor"), //Validado
-                                    null //senha
-                                    );
+//            User userEdit = new User(
+//                                    null, 
+//                                    messageO.optString("name"), 
+//                                    null, 
+//                                    0,
+//                                    messageO.optString("city"), //cidade
+//                                    messageO.optString("state"), //Estado
+//                                    messageO.optInt("receptor"), //Validado
+//                                    null //senha
+//                                    );
+            User userEdit = new User();
+            userEdit.setName(messageO.optString("name"));
+            userEdit.setCity(messageO.optString("city"));
+            userEdit.setFederativeUnit(messageO.optString("state"));
+            userEdit.setRecepValidated(messageO.optInt("receptor"));
+            
             new EditRecordUser(connection, userEdit);//que quer abrir
             System.out.println("veio da landing page no final de tudo " + userEdit.getName());
             

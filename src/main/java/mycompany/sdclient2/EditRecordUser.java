@@ -37,10 +37,6 @@ public class EditRecordUser extends javax.swing.JFrame {
         this.userEdit = userEdit;
         System.out.println("veio no editRecord " + this.userEdit.getName());
         initComponents();
-        jTFNome.setText(userEdit.getName());
-        jTFCidade.setText(userEdit.getCity());
-        int indexOfElement = ArrayUtils.indexOf(Utils.federativeUnit, userEdit.getFederativeUnit());
-        jComboEstado.setSelectedIndex(indexOfElement);
         start();
 
     }
@@ -48,6 +44,10 @@ public class EditRecordUser extends javax.swing.JFrame {
     public void start() {
         this.pack();
         this.setVisible(true);
+        jTFNome.setText(userEdit.getName());
+        jTFCidade.setText(userEdit.getCity());
+        int indexOfElement = ArrayUtils.indexOf(Utils.federativeUnit, userEdit.getFederativeUnit());
+        jComboEstado.setSelectedIndex(indexOfElement);
         System.out.println("veio no editRecord metodo start " + this.userEdit.getName());
     }
 
@@ -231,7 +231,7 @@ public class EditRecordUser extends javax.swing.JFrame {
         //Se ele já vier como 1 que seria validado, essa flag já tem q existir. Contudo deve ser disable
         //Se ele vier como 0, a flag ficaria como disable também. Pois significa que está aguardando ser ou não
         //Um receptor
-        jTFNome.setText(userEdit.getName());
+        //jTFNome.setText(userEdit.getName());
 
         JSONObject editarUser = new JSONObject();
         JSONObject editarUserMessage = new JSONObject();
@@ -239,11 +239,11 @@ public class EditRecordUser extends javax.swing.JFrame {
         if (jPFSenha.getText().equals(jPFRepitaSenha.getText())) {
             try {
                 editarUser.put("protocol", 720);
-                editarUser.put("message", editarUserMessage);
                 editarUserMessage.put("name", jTFNome.getText());
                 editarUserMessage.put("city", jTFCidade.getText());
                 editarUserMessage.put("state",Utils.federativeUnit[jComboEstado.getSelectedIndex()]);
                 editarUserMessage.put("password", jPFSenha.getText());
+                editarUser.put("message", editarUserMessage);
                 Utils.sendMessage(connection, editarUser.toString());
                 String messageJson = Utils.receiveMessage(connection);
                 JSONObject jsonO = new JSONObject(messageJson);
