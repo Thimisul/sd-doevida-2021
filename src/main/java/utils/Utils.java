@@ -5,10 +5,13 @@
  */
 package utils;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,11 +22,11 @@ import java.util.logging.Logger;
 public class Utils {
     public static String federativeUnit[]={"AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"};
     
-    public static boolean sendMessage(Socket connection, String message) {
+public static boolean sendMessage(Socket connection, String message) {
         try {
-            ObjectOutputStream output = new ObjectOutputStream(connection.getOutputStream());
+            DataOutputStream output = new DataOutputStream(connection.getOutputStream());
             output.flush();
-            output.writeObject(message);
+            output.write((message +"\n").getBytes("UTF-8"));
             output.flush();
             System.out.println("Mensagem enviada: " + message);
             output.flush();
@@ -39,12 +42,12 @@ public class Utils {
         String response = null;
 
         try {
-            ObjectInputStream input = new ObjectInputStream(connection.getInputStream());
-            response = (String) input.readObject();
+            DataInputStream input = new DataInputStream(connection.getInputStream());
+            response = input.readLine();
         } catch (IOException ex) {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }   
         return response;
     }
